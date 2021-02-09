@@ -4,7 +4,7 @@ A website to allow items of those who have passed, to be distributed easier. As 
 ## Dependencies
 CodeIgniter v4.1.1 - Current version as of Feb 8th, 2021  
 PHP v7.3+  
-
+Database Collation - utf8_general_ci
 ## Where to put on web server
 Place the `application` & `system` folders a level up from the root web directory.
 
