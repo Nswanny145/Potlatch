@@ -12,13 +12,6 @@ class UserModel extends Model {
 
     protected $allowedFields = ['first_name', 'last_name', 'email', 'password'];
 
-    public function createUser() {
-
-    }
-
-    public function checkCredentials($email, $password) {
-
-    }
 }
 
 ?>
