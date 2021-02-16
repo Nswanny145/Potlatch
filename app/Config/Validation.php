@@ -40,4 +40,12 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+
+	public $signup = [
+		'email' => 'required|valid_email',
+		'first_name' => 'required',
+		'last_name' => 'required',
+		'password' => 'required',
+		'passwordConf' => 'required|matches[password]'
+	];
 }
