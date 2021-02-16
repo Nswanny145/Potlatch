@@ -12,7 +12,9 @@ class Signup extends BaseController {
         $validation = \Config\Services::validation();
         helper(['form', 'url']);
 
-        if(!$this->validate($validation->getRuleGroup('signup'))){
+        if(!$this->validate(
+                $validation->getRuleGroup('signup'),
+                $validation->getRuleGroup('signup_errors'))){
             return view('create_account', [
                 'validation' => $this->validator
             ]);

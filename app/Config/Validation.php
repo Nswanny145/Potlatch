@@ -48,4 +48,24 @@ class Validation
 		'password' => 'required',
 		'passwordConf' => 'required|matches[password]'
 	];
+
+	public $signup_errors = [
+		'email' => [
+			'required' => 'Email is required',
+			'valid_email' => 'Provided email is not valid'
+		],
+		'first_name' => [
+			'required' => 'First Name is required',
+		],
+		'last_name' => [
+			'required' => 'Last Name is required',
+		],
+		'password' => [
+			'required' => 'Password is required',
+		],
+		'passwordConf' => [
+			'required' => 'Password confirmation is required',
+			'matches' => 'Password confirmation must match password'
+		]
+	];
 }
