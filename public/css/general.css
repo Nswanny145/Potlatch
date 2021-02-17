@@ -4,6 +4,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-family: 'Roboto', sans-serif;
 }
 /* ========================================================================
                                 Navbar Styles
@@ -21,7 +22,7 @@ nav {
 
 nav > * {
     display: inline-block;
-    
+
     padding: 0 2rem;
 
     line-height: 5rem;
@@ -40,6 +41,26 @@ nav > .login {
 nav > .login > a {
     text-decoration: none;
     color: white;
+}
+
+.dropdown {
+    display: none;
+    background-color: white;
+    box-shadow: 0 5px 15px -5px grey;
+    color: black;
+}
+
+.dropdown a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.dropdown > div:hover {
+    background-color: lightgrey;
+}
+
+nav > .login:hover .dropdown {
+    display: inherit;
 }
 /* ========================================================================
                                 Content Styles

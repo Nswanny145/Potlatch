@@ -44,6 +44,10 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
+		//helper('cookie');
 		$this->session = \Config\Services::session();
+		/*if($user = get_cookie('user')){
+			$this->session->set('user', $user);
+		}*/
 	}
 }
