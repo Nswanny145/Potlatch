@@ -4,7 +4,7 @@ namespace App\Controllers;
 class Signup extends BaseController {
     public function index() {
         helper(['form', 'url']);
-        return view('create_account');
+        return view('signup');
     }
 
     public function create() {
@@ -14,17 +14,20 @@ class Signup extends BaseController {
         if(!$this->validate(
                 $validation->getRuleGroup('signup'),
                 $validation->getRuleGroup('signup_errors'))){
-            return view('create_account', [
+            return view('signup', [
                 'validation' => $this->validator
             ]);
         }else{
+            $password = trim($this->request->getVar('password'));
             $userModel = new \App\Models\UserModel();
             // Validate data
             $data = [
                 'first_name' => $this->request->getVar('first_name', FILTER_SANITIZE_STRING),
                 'last_name' => $this->request->getVar('last_name', FILTER_SANITIZE_STRING),
                 'email' => $this->request->getVar('email', FILTER_SANITIZE_STRING),
-                'password' => password_hash($this->request->getVar('password', FILTER_SANITIZE_STRING), PASSWORD_DEFAULT)
+                'password' => password_hash(
+                    $password,
+                    PASSWORD_DEFAULT)
             ];
             $userModel->insert($data);
             return redirect('/');

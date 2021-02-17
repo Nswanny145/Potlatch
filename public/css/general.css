@@ -1,0 +1,61 @@
+html, body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+/* ========================================================================
+                                Navbar Styles
+   ======================================================================== */
+nav {
+    display: inline-block;
+    top: 0;
+    position: fixed;
+
+    height: 5rem;
+    width: 100%;
+
+    background-color: rgba(0, 110, 255, 0.993);
+}
+
+nav > * {
+    display: inline-block;
+    
+    padding: 0 2rem;
+
+    line-height: 5rem;
+    text-align: center;
+    color: white;
+}
+
+nav > brand {
+    font-size: 2rem;
+}
+
+nav > .login {
+    float: right;
+}
+
+nav > .login > a {
+    text-decoration: none;
+    color: white;
+}
+/* ========================================================================
+                                Content Styles
+   ======================================================================== */
+container {
+    display: block;
+    overflow: hidden auto;
+
+    height: calc(100% - 5rem);
+    margin-top: 5rem;
+    padding: 0 5rem;
+}
+
+footer {
+    width: 100%;
+
+    text-align: center;
+    color: rgb(83, 83, 83);
+}

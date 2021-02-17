@@ -68,4 +68,19 @@ class Validation
 			'matches' => 'Password confirmation must match password'
 		]
 	];
+
+	public $login = [
+		'email' => 'required|valid_email',
+		'password' => 'required'
+	];
+
+	public $login_errors = [
+		'email' => [
+			'required' => 'Email is required',
+			'valid_email' => 'Provided email is not valid'
+		],
+		'password' => [
+			'required' => 'Password is required',
+		]
+	];
 }
