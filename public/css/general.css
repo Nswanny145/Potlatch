@@ -6,11 +6,18 @@ html, body {
     overflow: hidden;
     font-family: 'Roboto', sans-serif;
 }
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* ========================================================================
                                 Navbar Styles
    ======================================================================== */
 nav {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
     top: 0;
     position: fixed;
 
@@ -18,29 +25,22 @@ nav {
     width: 100%;
 
     background-color: rgba(0, 110, 255, 0.993);
-}
-
-nav > * {
-    display: inline-block;
-
-    padding: 0 2rem;
 
     line-height: 5rem;
     text-align: center;
     color: white;
 }
 
+nav > content {
+    flex-grow: 2;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
 nav > brand {
     font-size: 2rem;
-}
-
-nav > .login {
-    float: right;
-}
-
-nav > .login > a {
-    text-decoration: none;
-    color: white;
+    padding: 0 2rem;
 }
 
 .dropdown {
@@ -50,18 +50,19 @@ nav > .login > a {
     color: black;
 }
 
-.dropdown a {
-    text-decoration: none;
-    color: inherit;
+nav .login:hover .dropdown {
+    display: inherit;
 }
 
-.dropdown > div:hover {
+.dropdown > a {
+    display: block;
+}
+
+.dropdown > a:hover {
     background-color: lightgrey;
 }
 
-nav > .login:hover .dropdown {
-    display: inherit;
-}
+
 /* ========================================================================
                                 Content Styles
    ======================================================================== */

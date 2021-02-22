@@ -11,17 +11,20 @@
 </head>
 <body>
     <nav>
-        <brand>Potlatch</brand>
-        <div class="login">
-            <?php if($user): ?>
-                Welcome, <?= $user->first_name.' '.$user->last_name ?>!&nbsp;&#9662;
-                <div class="dropdown">
-                    <div>My Account</div>
-                    <div><?= anchor('logout', 'Logout') ?></div>
-                </div>
-            <?php else: ?>
-                <?= anchor('login', 'Login') ?>&nbsp;/&nbsp;<?= anchor('signup', 'Signup') ?>
-            <?php endif; ?>
-        </div>
+        <brand><?= anchor('', 'Potlatch') ?></brand>
+        <content>
+            <div><?= anchor('/potlatch', 'My Potlatch\'s') ?></div>
+            <div class="login">
+                <?php if($user): ?>
+                    Welcome, <?= $user->first_name.' '.$user->last_name ?>!&nbsp;&#9662;
+                    <div class="dropdown">
+                        <?= anchor('account', 'My Account') ?>
+                        <?= anchor('logout', 'Logout') ?>
+                    </div>
+                <?php else: ?>
+                    <?= anchor('login', 'Login') ?>&nbsp;/&nbsp;<?= anchor('signup', 'Signup') ?>
+                <?php endif; ?>
+            </div>
+        </content>
     </nav>
     <container>

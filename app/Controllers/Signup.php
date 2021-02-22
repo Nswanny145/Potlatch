@@ -29,8 +29,11 @@ class Signup extends BaseController {
                     $password,
                     PASSWORD_DEFAULT)
             ];
-            $userModel->insert($data);
-            return redirect('/');
+            if($userModel->insert($data)){
+                return redirect('/');
+            }else{
+                return redirect()->to('/signup');
+            }
         }
     }
 }

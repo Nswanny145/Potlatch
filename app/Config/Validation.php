@@ -42,7 +42,7 @@ class Validation
 	//--------------------------------------------------------------------
 
 	public $signup = [
-		'email' => 'required|valid_email',
+		'email' => 'required|valid_email|is_unique[user.email]',
 		'first_name' => 'required',
 		'last_name' => 'required',
 		'password' => 'required',
@@ -52,7 +52,8 @@ class Validation
 	public $signup_errors = [
 		'email' => [
 			'required' => 'Email is required',
-			'valid_email' => 'Provided email is not valid'
+			'valid_email' => 'Provided email is not valid',
+			'is_unique' => 'An account already exists with that email'
 		],
 		'first_name' => [
 			'required' => 'First Name is required',

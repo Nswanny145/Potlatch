@@ -32,7 +32,7 @@
         <?= form_open('login/login', ['class' => 'card-body']) ?>
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="text" class="form-control" id="email" name="email" value="" size="50" />
+                <input type="text" class="form-control" id="email" name="email" value="" size="100" />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
