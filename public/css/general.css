@@ -31,16 +31,19 @@ nav {
     color: white;
 }
 
-nav > content {
-    flex-grow: 2;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 1rem;
-}
-
 nav > brand {
     font-size: 2rem;
     padding: 0 2rem;
+}
+
+nav > content {
+    flex-grow: 2;
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav > content > div {
+    padding-right: 2rem;
 }
 
 .dropdown {
@@ -66,7 +69,7 @@ nav .login:hover .dropdown {
 /* ========================================================================
                                 Content Styles
    ======================================================================== */
-container {
+body > container {
     display: block;
     overflow: hidden auto;
 
@@ -75,9 +78,21 @@ container {
     padding: 0 5rem;
 }
 
-footer {
+body > container > footer {
     width: 100%;
 
     text-align: center;
     color: rgb(83, 83, 83);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    display: block;
+    height: fit-content;
+    padding: 0.3rem 0.6rem;
+    margin: auto 0;
 }
