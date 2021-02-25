@@ -10,7 +10,7 @@ class PotlatchModel extends Model {
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
 
-    protected $allowedFields = ['user_id'];
+    protected $allowedFields = ['user_id', 'title', 'description'];
 
 }
 

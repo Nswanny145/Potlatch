@@ -84,4 +84,14 @@ class Validation
 			'required' => 'Password is required',
 		]
 	];
+
+	public $create_potlatch = [
+		'title' => 'required',
+		'description' => 'required'
+	];
+
+	public $create_potlatch_errors = [
+		'title' => ['required' => 'Title is required'],
+		'description' => ['required' => 'Description is required']
+	];
 }

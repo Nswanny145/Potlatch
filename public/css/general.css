@@ -96,3 +96,35 @@ button {
     padding: 0.3rem 0.6rem;
     margin: auto 0;
 }
+
+overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.493);
+}
+
+overlay > form {
+    position: relative;
+    top: 50%;
+    transform: translateY(-100%);
+    margin: auto;
+    width: 350px;
+
+    background-color: white;
+    padding: 1rem;
+}
+
+overlay > form > input, overlay > form > textarea {
+    width: 100%;
+    resize: none;
+}
+
+overlay button.close {
+    margin-left: auto;
+}
