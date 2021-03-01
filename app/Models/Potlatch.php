@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class PotlatchModel extends Model {
+class Potlatch extends Model {
     protected $table = 'potlatch';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;

@@ -13,7 +13,7 @@
     <nav>
         <brand><?= anchor('', 'Potlatch') ?></brand>
         <content>
-            <div><?= anchor('/potlatch', 'My Potlatch\'s') ?></div>
+            <div><?= anchor('potlatch', 'My Potlatch\'s') ?></div>
             <div class="login">
                 <?php if($user): ?>
                     Welcome, <?= $user->first_name.' '.$user->last_name ?>!&nbsp;&#9662;

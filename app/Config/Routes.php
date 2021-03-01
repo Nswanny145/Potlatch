@@ -34,6 +34,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/signup/create', 'Signup::create');
+$routes->get('/potlatch/(:num)', 'Potlatch::view/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

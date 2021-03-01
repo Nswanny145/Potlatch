@@ -21,18 +21,18 @@ nav {
     top: 0;
     position: fixed;
 
-    height: 5rem;
+    height: 4rem;
     width: 100%;
 
     background-color: rgba(0, 110, 255, 0.993);
 
-    line-height: 5rem;
+    line-height: 4rem;
     text-align: center;
     color: white;
 }
 
 nav > brand {
-    font-size: 2rem;
+    font-size: x-large;
     padding: 0 2rem;
 }
 
@@ -73,8 +73,8 @@ body > container {
     display: block;
     overflow: hidden auto;
 
-    height: calc(100% - 5rem);
-    margin-top: 5rem;
+    height: calc(100% - 4rem);
+    margin-top: 4rem;
     padding: 0 5rem;
 }
 
@@ -109,18 +109,21 @@ overlay {
     background-color: rgba(0, 0, 0, 0.493);
 }
 
-overlay > form {
+overlay content {
+    display: block;
+
     position: relative;
     top: 50%;
     transform: translateY(-100%);
     margin: auto;
-    width: 350px;
 
+    width: 350px;
+    border-radius: 10px;
     background-color: white;
     padding: 1rem;
 }
 
-overlay > form > input, overlay > form > textarea {
+overlay form > input, overlay form > textarea {
     width: 100%;
     resize: none;
 }

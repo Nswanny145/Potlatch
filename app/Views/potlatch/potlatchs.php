@@ -4,10 +4,7 @@
 <content>
     <?php if(isset($managed) && !empty($managed)): ?>
         <?php foreach($managed as $potlatch): ?>
-            <card>
-                <header><?= $potlatch['title'] ?></header>
-                <content><?= $potlatch['description'] ?></content>
-            </card>
+            <?= view('potlatch/components/potlatch_card.php', $potlatch) ?>
         <?php endforeach; ?>
     <?php else: ?>
         <p>You have not created any Potlatchs yet.</p>
@@ -19,25 +16,24 @@
 <content>
     <?php if(isset($joined) && !empty($joined)): ?>
         <?php foreach($joined as $potlatch): ?>
-            <card>
-                <header><?= $potlatch['title'] ?></header>
-                <content><?= $potlatch['description'] ?></content>
-            </card>
+            <?= view('potlatch/components/potlatch_card.php', $potlatch) ?>
         <?php endforeach; ?>
     <?php else: ?>
         <p>You have not joined any Potlatchs yet.</p>
     <?php endif; ?>
 </content>
 <overlay id="overlay_create">
-    <?= form_open('potlatch/create', ['autocomplete', 'on']) ?>
+    <content>
         <button class="close" onclick="toggleOverlay()">Close</button>
-        <h1>Create Potlatch</h1>
-        <label for="title">Title</label>
-        <input type="text" id="title" name="title" value="" size="50" />
-        <label for="description">Description</label>
-        <textarea id="description" name="description" value="" rows="9" maxlength="400"></textarea>
-        <button type="submit">Create</button>
-    </form>
+        <?= form_open('potlatch/create', ['autocomplete', 'on']) ?>
+            <h1>Create Potlatch</h1>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" value="" size="50" />
+            <label for="description">Description</label>
+            <textarea id="description" name="description" value="" rows="9" maxlength="400"></textarea>
+            <button type="submit">Create</button>
+        </form>
+    </content>
 </overlay>
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -45,8 +41,7 @@
   crossorigin="anonymous"></script>
 <script>
     let overlayT = false;
-    function toggleOverlay(e){
-        e.preventDefault();
+    function toggleOverlay(){
         if(overlayT){
             $('#overlay_create').css('display', 'none');
             overlayT = false;

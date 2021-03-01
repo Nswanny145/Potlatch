@@ -16,3 +16,5 @@ class Home extends BaseController
 		echo view('components/footer');
 	}
 }
+
+?>

@@ -13,16 +13,40 @@ class Potlatch extends BaseController
             echo view('components/header', $data);
             unset($data);
 
-            $potlatchModel = new \App\Models\PotlatchModel();
+            $potlatchModel = new \App\Models\Potlatch();
             $managed = $potlatchModel->where('user_id', $this->session->user->id)->findAll();
             $data['managed'] = $managed;
             $data['joined'] = [];
             echo view('potlatch/potlatchs', $data);
+
             echo view('components/footer');
         }else{
             return redirect()->to('/login');
         }
 	}
+
+    public function view($id) {
+        if(isset($this->session->user)){
+            helper(['form', 'url', 'html']);
+
+            $data['title'] = 'Potlatch';
+            $data['user'] = $this->session->user;
+            echo view('components/header', $data);
+            unset($data);
+
+            $potlatchModel = new \App\Models\Potlatch();
+            $potlatchItemModel = new \App\Models\PotlatchItem();
+            $potlatch = $potlatchModel->where('id', $id)->get()->getRowArray();
+            $potlatchItems = $potlatchItemModel->where('potlatch_id', $id)->get()->getResultArray();
+            $data['potlatch'] = $potlatch;
+            $data['items'] = $potlatchItems;
+            echo view('potlatch/potlatch', $data);
+
+            echo view('components/footer');
+        }else{
+            return redirect()->to('/login');
+        }
+    }
 
     public function create() {
         if(isset($this->session->user)){
@@ -52,3 +76,5 @@ class Potlatch extends BaseController
         }
     }
 }
+
+?>
