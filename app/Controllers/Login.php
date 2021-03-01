@@ -26,7 +26,7 @@ class Login extends BaseController {
                 $email = $this->request->getVar('email', FILTER_SANITIZE_STRING);
                 $password = $this->request->getVar('password', FILTER_SANITIZE_STRING);
                 //$rememberMe = $this->request->getVar('rememberMe');
-                $userModel = new \App\Models\UserModel();
+                $userModel = new \App\Models\User();
                 $user = $userModel->where('email', $email)->get()->getRow();
                 if(password_verify($password, $user->password)){
                     unset($user->password);

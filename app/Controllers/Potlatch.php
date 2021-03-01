@@ -27,22 +27,26 @@ class Potlatch extends BaseController
 
     public function view($id) {
         if(isset($this->session->user)){
-            helper(['form', 'url', 'html']);
+            helper(['form', 'url', 'html', 'user']);
+            if(hasAccess($this->session->user->id, $id)){
+                $data['title'] = 'Potlatch';
+                $data['user'] = $this->session->user;
+                echo view('components/header', $data);
+                unset($data);
 
-            $data['title'] = 'Potlatch';
-            $data['user'] = $this->session->user;
-            echo view('components/header', $data);
-            unset($data);
+                $potlatchModel = new \App\Models\Potlatch();
+                $potlatchItemModel = new \App\Models\PotlatchItem();
+                $potlatch = $potlatchModel->where('id', $id)->get()->getRowArray();
+                $potlatchItems = $potlatchItemModel->where('potlatch_id', $id)->get()->getResultArray();
+                $data['potlatch'] = $potlatch;
+                $data['items'] = $potlatchItems;
+                $data['isOwner'] = isOwner($this->session->user->id, $id);
+                echo view('potlatch/potlatch', $data);
 
-            $potlatchModel = new \App\Models\Potlatch();
-            $potlatchItemModel = new \App\Models\PotlatchItem();
-            $potlatch = $potlatchModel->where('id', $id)->get()->getRowArray();
-            $potlatchItems = $potlatchItemModel->where('potlatch_id', $id)->get()->getResultArray();
-            $data['potlatch'] = $potlatch;
-            $data['items'] = $potlatchItems;
-            echo view('potlatch/potlatch', $data);
-
-            echo view('components/footer');
+                echo view('components/footer');
+            }else{
+                throw new \CodeIgniter\Exceptions\PageNotFoundException();
+            }
         }else{
             return redirect()->to('/login');
         }

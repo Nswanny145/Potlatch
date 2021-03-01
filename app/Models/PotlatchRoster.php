@@ -4,14 +4,13 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model {
-    protected $table = 'user';
+class PotlatchRoster extends Model {
+    protected $table = 'roster';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
 
-    protected $allowedFields = ['first_name', 'last_name', 'email', 'password'];
-
+    protected $allowedFields = ['potlatch_id', 'user_id', 'coins'];
 }
 
 ?>
