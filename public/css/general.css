@@ -70,7 +70,6 @@ nav .login:hover .dropdown {
                                 Content Styles
    ======================================================================== */
 body > container {
-    display: block;
     overflow: hidden auto;
 
     height: calc(100% - 4rem);
@@ -85,16 +84,38 @@ body > container > footer {
     color: rgb(83, 83, 83);
 }
 
+body > container > content {
+    display: flex;
+}
+
 header {
     display: flex;
     justify-content: space-between;
 }
 
+header > * {
+    margin-right: 2rem;
+}
+
 button {
-    display: block;
     height: fit-content;
     padding: 0.3rem 0.6rem;
     margin: auto 0;
+}
+
+body > container, card, card > content, button, overlay > content {
+    display: block;
+}
+
+card {
+    margin: 1rem;
+    width: fit-content;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+card > * {
+    padding: 0 1rem;
 }
 
 overlay {
@@ -109,15 +130,13 @@ overlay {
     background-color: rgba(0, 0, 0, 0.493);
 }
 
-overlay content {
-    display: block;
-
+overlay > content {
     position: relative;
     top: 50%;
-    transform: translateY(-100%);
+    transform: translateY(-50%);
     margin: auto;
 
-    width: 350px;
+    max-width: 350px;
     border-radius: 10px;
     background-color: white;
     padding: 1rem;

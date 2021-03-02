@@ -5,6 +5,7 @@ namespace App\Controllers;
 class Account extends BaseController
 {
 	public function index() {
+        // Check if user is signed in,
         if(isset($this->session->user)){
             helper(['form', 'url', 'html']);
 

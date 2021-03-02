@@ -35,6 +35,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('/signup/create', 'Signup::create');
 $routes->get('/potlatch/(:num)', 'Potlatch::view/$1');
+$routes->get('/auction/(:num)', 'Auction::view/$1');
 
 /*
  * --------------------------------------------------------------------

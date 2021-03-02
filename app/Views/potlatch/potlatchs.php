@@ -25,7 +25,7 @@
 <overlay id="overlay_create">
     <content>
         <button class="close" onclick="toggleOverlay()">Close</button>
-        <?= form_open('potlatch/create', ['autocomplete', 'on']) ?>
+        <?= form_open('potlatch/createPotlatch', ['autocomplete', 'on']) ?>
             <h1>Create Potlatch</h1>
             <label for="title">Title</label>
             <input type="text" id="title" name="title" value="" size="50" />
