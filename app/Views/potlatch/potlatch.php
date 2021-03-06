@@ -24,6 +24,7 @@
             <input type="text" id="title" name="title" value="" size="50" />
             <label for="description">Description</label>
             <textarea id="description" name="description" value="" rows="9" maxlength="1000"></textarea>
+            <input type="file" enctype="multipart/form-data" name="images[]" multiple/>
             <button type="submit">Create</button>
             <input name="potlatch_id" type="number" value="<?= $potlatch['id'] ?>" hidden/>
         </form>

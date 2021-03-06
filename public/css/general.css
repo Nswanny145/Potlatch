@@ -109,7 +109,7 @@ body > container, card, card > content, button, overlay > content {
 
 card {
     margin: 1rem;
-    width: fit-content;
+    width: max-content;
     border: 1px solid black;
     border-radius: 10px;
 }

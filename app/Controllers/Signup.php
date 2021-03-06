@@ -19,7 +19,7 @@ class Signup extends BaseController {
             ]);
         }else{
             $password = trim($this->request->getVar('password'));
-            $userModel = new \App\Models\UserModel();
+            $userModel = new \App\Models\User();
             // Validate data
             $data = [
                 'first_name' => $this->request->getVar('first_name', FILTER_SANITIZE_STRING),
