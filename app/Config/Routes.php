@@ -33,6 +33,8 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('/uploadimage', 'UploadImageController::index');
+$routes->get('/storeimage','UploadImageController::store');
 $routes->get('/signup/create', 'Signup::create');
 $routes->get('/potlatch/(:num)', 'Potlatch::view/$1');
 $routes->get('/auction/(:num)', 'Auction::view/$1');
