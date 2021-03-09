@@ -21,7 +21,13 @@
         <?php if($canBid): ?>
             <button type="submit">Place Bid</button>
         <?php else: ?>
-            <button disabled>Bidding Disabled</button>
+            <button disabled>
+                <?php if($isHighestBidder): ?>
+                    Highest Bidder
+                <?php else: ?>
+                    Bid Disabled
+                <?php endif; ?>
+            </button>
         <?php endif; ?>
         <input name="item_id" type="number" value="<?= $item['id'] ?>" hidden/>
         <input name="highestBid" type="number" value="<?= $highestBid['amount']?>" hidden/>
