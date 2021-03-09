@@ -1,8 +1,10 @@
 <div>
     <carousel>
-        <?php foreach($images as $filename): ?>
-            <?= img('image/item/'.$item['potlatch_id'].'/'.$item['id'].'/'.$filename) ?>
-        <?php endforeach; ?>
+        <?php if(isset($images)): ?>
+            <?php foreach($images as $filename): ?>
+                <?= img('image/item/'.$item['potlatch_id'].'/'.$item['id'].'/'.$filename) ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </carousel>
     <p>Current Bid: $<?= $highestBid['amount'] ?></p>
     <?php if($canBid): ?>

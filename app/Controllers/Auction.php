@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use Exception;
+
 class Auction extends BaseController
 {
     // Shows an item's auction based on the id.
@@ -25,11 +27,13 @@ class Auction extends BaseController
                 $data['isOwner'] = isOwner($this->session->user->id, $potlatchItem->potlatch_id);
                 $data['canBid'] = (!$data['isOwner'] && $highestBid->user_id != $this->session->user->id);
                 // Get list of all images in item folder.
-                $files = scandir('images/'.$potlatchItem->potlatch_id.'/'.$potlatchItem->id);
-                foreach($files as $file) {
-                    if($file == '.' || $file == '..') continue;
-                    $data['images'][] = $file;
-                }
+                try{
+                    $files = scandir('images/'.$potlatchItem->potlatch_id.'/'.$potlatchItem->id);
+                    foreach($files as $file) {
+                        if($file == '.' || $file == '..') continue;
+                        $data['images'][] = $file;
+                    }
+                }catch(Exception $e){}
                 echo view('potlatch/auction', $data);
 
                 echo view('components/footer');
