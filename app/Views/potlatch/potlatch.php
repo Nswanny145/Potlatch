@@ -10,6 +10,9 @@
     <?php foreach($items as $item): ?>
         <card>
             <header><?= $item['title'] ?></header>
+            <content>
+                <?= anchor('auction/'.$item['id'], 'Go To ->') ?>
+            </content>
         </card>
     <?php endforeach; ?>
 </items>
@@ -19,7 +22,7 @@
             <h1>Add Item</h1>
             <button class="close" onclick="toggleOverlay()">Close</button>
         </header>
-        <?= form_open('potlatch/createItem', ['autocomplete', 'on']) ?>
+        <?= form_open('potlatch/createItem', ['enctype' => 'multipart/form-data']) ?>
             <label for="title">Title</label>
             <input type="text" id="title" name="title" value="" size="50" />
             <label for="description">Description</label>
