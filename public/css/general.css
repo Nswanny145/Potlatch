@@ -80,6 +80,8 @@ body > container {
 body > container > footer {
     width: 100%;
 
+    padding-top: 1rem;
+
     text-align: center;
     color: rgb(83, 83, 83);
 }
@@ -149,4 +151,25 @@ overlay form > input, overlay form > textarea {
 
 overlay button.close {
     margin-left: auto;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+
+    padding-top: 5rem;
+}
+section > * {
+    padding-right: 2rem;
+}
+
+carousel {
+    display: block;
+}
+
+carousel img {
+    height: 500px;
+    width: 500px;
+
+    object-fit: contain;
 }

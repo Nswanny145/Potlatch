@@ -35,25 +35,25 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="first_name">First Name</label>
-                    <input type="text" class="form-control" id="first_name" name="first_name" value="" size="50" />
+                    <input type="text" class="form-control" id="first_name" name="first_name" value="" size="50" required/>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="last_name">Last Name</label>
-                    <input type="text" class="form-control" id="last_name" name="last_name" value="" size="50" />
+                    <input type="text" class="form-control" id="last_name" name="last_name" value="" size="50" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="text" class="form-control" id="email" name="email" value="" size="100" />
+                <input type="text" class="form-control" id="email" name="email" value="" size="100" required/>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" value="" size="50" />
+                    <input type="password" class="form-control" id="password" name="password" value="" size="50" required/>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="passwordConf">Re-Password</label>
-                    <input type="password" class="form-control" id="passwordConf" name="passwordConf" value="" size="50" />
+                    <input type="password" class="form-control" id="passwordConf" name="passwordConf" value="" size="50" required/>
                 </div>
             </div>
             <button type="submit" class="btn btn-block btn-primary">Create Account</button>

@@ -32,11 +32,11 @@
         <?= form_open('login/login', ['class' => 'card-body']) ?>
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="text" class="form-control" id="email" name="email" value="" size="100" />
+                <input type="text" class="form-control" id="email" name="email" value="" size="100" required/>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" value="" size="50" />
+                <input type="password" class="form-control" id="password" name="password" value="" size="50" required/>
             </div>
             <!--<div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
