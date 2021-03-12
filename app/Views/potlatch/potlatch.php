@@ -6,16 +6,21 @@
         <button onclick="toggleOverlay()">Add Item</button>
     <?php endif; ?>
 </header>
-<items>
-    <?php foreach($items as $item): ?>
-        <card>
-            <header><?= $item['title'] ?></header>
-            <content>
-                <?= anchor('auction/'.$item['id'], 'Go To ->') ?>
-            </content>
-        </card>
-    <?php endforeach; ?>
-</items>
+<content class="flex">
+    <?php if(isset($items ) && !empty($items )): ?>
+        <?php foreach($items as $item): ?>
+            <card>
+                <header><?= $item['title'] ?></header>
+                <content><?= $item['description'] ?></content>
+                <footer>
+                    <?= anchor('auction/'.$item['id'], 'Go To ->') ?>
+                </footer>
+            </card>
+        <?php endforeach; ?>
+    <?php else: ?>
+        You have not added any Items yet.
+    <?php endif; ?>
+</content>
 <overlay id="overlay_create">
     <content>
         <header>

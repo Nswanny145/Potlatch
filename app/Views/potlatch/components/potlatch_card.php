@@ -1,7 +1,9 @@
 <card>
     <header><?= $title ?></header>
     <content>
-        <p><?= $description ?></p>
-        <?= anchor('potlatch/'.$id, 'Go To ->') ?>
+        <?= $description ?>
     </content>
+    <footer>
+        <?= anchor('potlatch/'.$id, 'Go To ->') ?>
+    </footer>
 </card>
