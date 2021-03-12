@@ -1,4 +1,4 @@
-        <footer>Created by Brett J, Nick S, Carter R.</footer>
+        <footer>Created by Brett J, Noah S, Carter R.</footer>
     </container>
 </body>
 </html>

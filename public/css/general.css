@@ -164,7 +164,7 @@ section > * {
 }
 
 carousel {
-    display: block;
+    display: flex;
 }
 
 carousel img {
@@ -172,4 +172,28 @@ carousel img {
     width: 500px;
 
     object-fit: contain;
+}
+
+carousel img:not(:first-child) {
+    display: none;
+}
+
+carousel button {
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    box-shadow: 0 5px 15px -5px grey;
+}
+
+carousel button:focus {
+    outline: none;
+}
+
+carousel button:active {
+    background-color: lightgrey;
+}
+
+button, carousel {
+    user-select: none;
 }

@@ -25,7 +25,7 @@ class Auction extends BaseController
                 $data['item'] = (array)$potlatchItem;
                 $data['highestBid'] = (array)$highestBid;
                 $data['isOwner'] = isOwner($this->session->user->id, $potlatchItem->potlatch_id);
-                $data['isHighestBidder'] = $highestBid->user_id = $this->session->user->id;
+                $data['isHighestBidder'] = $highestBid->user_id == $this->session->user->id;
                 $data['canBid'] = (!$data['isOwner'] && !$data['isHighestBidder'] && $highestBid->amount+1 <= getAvailableCoins($this->session->user->id, $potlatchItem->potlatch_id));
                 // Get list of all images in item folder.
                 try{
