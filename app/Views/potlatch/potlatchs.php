@@ -11,7 +11,10 @@
     <?php endif; ?>
 </content>
 <header>
-    <h1>Joined Potlatchs</h1><button>Join Potlatch</button>
+    <h1>Joined Potlatchs</h1>
+    <?= form_open('potlatch/JoinPotlatch', ['style', 'display: inline-flex!important;']) ?>
+        <input type="text" name="code" placeholder="Invite Code" required/><button>Join Potlatch</button>
+    </form>
 </header>
 <content class="flex">
     <?php if(isset($joined) && !empty($joined)): ?>
@@ -22,6 +25,7 @@
         You have not joined any Potlatchs yet.
     <?php endif; ?>
 </content>
+<!-- Overlays -->
 <overlay id="overlay_create">
     <content>
         <button class="close" onclick="toggleOverlay()">Close</button>

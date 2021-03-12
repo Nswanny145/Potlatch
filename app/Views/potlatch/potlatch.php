@@ -3,7 +3,7 @@
 <header style="justify-content: flex-start;">
     <h2>Items</h2>
     <?php if($isOwner): ?>
-        <button onclick="toggleOverlay()">Add Item</button>
+        <button id="addItem" data-id="item">Add Item</button>
     <?php endif; ?>
 </header>
 <content class="flex">
@@ -21,11 +21,44 @@
         You have not added any Items yet.
     <?php endif; ?>
 </content>
-<overlay id="overlay_create">
+<?php if($isOwner): ?>
+    <header style="justify-content: flex-start;">
+        <h2>Bidders</h2>
+        <button id="addBidder" data-id="bidder">Add Bidder</button>
+    </header>
+    <content>
+        <?php if(isset($roster) && !empty($roster)): ?>
+            <?php foreach($roster as $bidder): ?>
+                <card>
+                    <header>
+                        <?php if(!is_null($bidder['user_id'])): ?>
+                            <?= $bidder['first_name'].' '.$bidder['last_name'] ?>
+                        <?php else: ?>
+                            Has not joined yet.
+                        <?php endif; ?>
+                    </header>
+                    <content>
+                        <?php if(!is_null($bidder['invite_id'])): ?>
+                            <div>Invite Code:&nbsp;<?= $bidder['invite_id']?></div>
+                        <?php endif; ?>
+                        <?php if(!is_null($bidder['user_id'])): ?>
+                            <div>Email:&nbsp;<?= $bidder['user_email']?></div>
+                        <?php endif; ?>
+                        <div>Coins:&nbsp;<?= $bidder['coins']?></div>
+                    </content>
+                </card>
+            <?php endforeach; ?>
+        <?php else: ?>
+            You have not added any Bidders yet.
+        <?php endif; ?>
+    </content>
+<?php endif; ?>
+<!-- Overlay -->
+<overlay id="overlay_item">
     <content>
         <header>
             <h1>Add Item</h1>
-            <button class="close" onclick="toggleOverlay()">Close</button>
+            <button class="close" data-id="item">Close</button>
         </header>
         <?= form_open('potlatch/createItem', ['enctype' => 'multipart/form-data']) ?>
             <label for="title">Title</label>
@@ -38,19 +71,38 @@
         </form>
     </content>
 </overlay>
+<overlay id="overlay_bidder">
+    <content>
+        <header>
+            <h1>Add Bidder</h1>
+            <button class="close" data-id="bidder">Close</button>
+        </header>
+        <?= form_open('potlatch/addBidder') ?>
+            <input type="text" name="email" placeholder="Email" />
+            <input type="number" name="coins" min="1" placeholder="# of coins" required/>
+            <button type="submit">Add</button>
+            <input name="potlatch_id" type="number" value="<?= $potlatch['id'] ?>" hidden/>
+        </form>
+    </content>
+</overlay>
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
 <script>
-    let overlayT = false;
-    function toggleOverlay(){
-        if(overlayT){
-            $('#overlay_create').css('display', 'none');
-            overlayT = false;
+    $('#addItem').click(toggleOverlay);
+    $('#overlay_item .close').click(toggleOverlay);
+
+    $('#addBidder').click(toggleOverlay);
+    $('#overlay_bidder .close').click(toggleOverlay);
+
+    function toggleOverlay(e){
+        let id = $(this).data('id');
+        let property = $('#overlay_'+id).css('display');
+        if(property == 'none') {
+            $('#overlay_'+id).css('display', 'block');
         }else{
-            $('#overlay_create').css('display', 'block');
-            overlayT = true;
+             $('#overlay_'+id).css('display', 'none');
         }
     }
 </script>
