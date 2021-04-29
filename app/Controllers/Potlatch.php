@@ -43,16 +43,30 @@ class Potlatch extends BaseController
                 echo view('components/header', $data);
                 unset($data);
 
-                $potlatchModel = new \App\Models\Potlatch();
-                $potlatchItemModel = new \App\Models\PotlatchItem();
-                // Select the potlatch.
-                $potlatch = $potlatchModel->where('id', $id)->get()->getRowArray();
-                // Select all the potlatch items.
-                $potlatchItems = $potlatchItemModel->where('potlatch_id', $id)->get()->getResultArray();
-                $data['potlatch'] = $potlatch;
-                $data['items'] = $potlatchItems;
                 // Specify if the user owns th potlatch.
                 $data['isOwner'] = isOwner($this->session->user->id, $id);
+
+                // Select the potlatch.
+                $potlatchModel = new \App\Models\Potlatch();
+                $potlatch = $potlatchModel->where('id', $id)->get()->getRowArray();
+                $data['potlatch'] = $potlatch;
+
+                // Select all the potlatch items.
+                $potlatchItemModel = new \App\Models\PotlatchItem();
+                $potlatchItems = $potlatchItemModel->where('potlatch_id', $id)->get();
+                if($potlatchItems){
+                    $potlatchItems = $potlatchItems->getResultArray();
+                    $data['items'] = $potlatchItems;
+                }
+
+                if($data['isOwner']){
+                    $db = db_connect();
+                    $roster = $db->query(
+                        'SELECT r.id AS roster_id, r.coins, r.user_id, u.first_name, u.last_name, u.email AS user_email, i.id AS invite_id, i.email AS invite_email
+                        FROM roster r LEFT JOIN user u ON u.id = r.user_id
+                        LEFT JOIN invite i ON i.roster_id = r.id  WHERE r.potlatch_id = ?', [$id])->getResultArray();
+                    $data['roster'] = $roster;
+                }
                 echo view('potlatch/potlatch', $data);
 
                 echo view('components/footer');
@@ -119,7 +133,8 @@ class Potlatch extends BaseController
                     $data = [
                         'potlatch_id' => $potlatch_id,
                         'title' => $this->request->getVar('title', FILTER_SANITIZE_STRING),
-                        'description' => $this->request->getVar('description', FILTER_SANITIZE_STRING)
+                        'description' => $this->request->getVar('description', FILTER_SANITIZE_STRING),
+                        'expiration' => $this->request->getVar('expiration', FILTER_SANITIZE_STRING)
                     ];
                     // Insert item.
                     if($item_id = $potlatchItemModel->insert($data)){
@@ -146,6 +161,63 @@ class Potlatch extends BaseController
                         return redirect()->to('/potlatch/error');
                     }
                 }
+            }else{ throw new \CodeIgniter\Exceptions\PageNotFoundException(); }
+        }else{ return redirect()->to('/login'); }
+    }
+
+    // Create an item for an individual potlatch.
+    public function addBidder() {
+        if(isset($this->session->user)){ // Check if signed in.
+            // Get potlatch id from hidden form input.
+            $potlatch_id = $this->request->getVar('potlatch_id', FILTER_VALIDATE_INT);
+            $coins = $this->request->getVar('coins', FILTER_VALIDATE_INT);
+            $email = $this->request->getVar('email', FILTER_VALIDATE_EMAIL);
+            helper(['form', 'url', 'user', 'text']);
+            // Check if potlatch is valid and if the user is the owner.
+            if($potlatch_id && $coins && $email && isOwner($this->session->user->id, $potlatch_id)){
+                $potlatchRosterModel = new \App\Models\PotlatchRoster();
+                $data = [
+                    'potlatch_id' => $potlatch_id,
+                    'coins' => $coins
+                ];
+                // Create new roster slot.
+                if($id = $potlatchRosterModel->insert($data)){
+                    $rosterInviteModel = new \App\Models\RosterInvite();
+                    $randomId = random_string('crypto', 32); // Generate roster invite code.
+                    $data = [
+                        'id' => $randomId,
+                        'roster_id' => $id,
+                        'email' => $email
+                    ];
+                    if($rosterInviteModel->insert($data, false)){
+                        return redirect()->to('/potlatch/'.$potlatch_id);
+                    }else{
+                        echo 'Failed to instert invite.';
+                        var_dump($data);
+                        exit;
+                    }
+                }else{ throw new \CodeIgniter\Exceptions\PageNotFoundException(); }
+            }else{ throw new \CodeIgniter\Exceptions\PageNotFoundException(); }
+        }else{ return redirect()->to('/login'); }
+    }
+
+    public function joinPotlatch() {
+        if(isset($this->session->user)){ // Check if signed in.
+            helper('user');
+            $inviteCode = $this->request->getVar('code', FILTER_SANITIZE_STRING);
+            $rosterInviteModel = new \App\Models\RosterInvite();
+            $rosterInvite = $rosterInviteModel->where('id', $inviteCode)->get()->getRow();
+            if($rosterInvite){
+                $potlatchRosterModel = new \App\Models\PotlatchRoster();
+                $roster = $potlatchRosterModel->where('id', $rosterInvite->roster_id);
+                if($roster){
+                    if(!isOwner($this->session->user->id, $roster->potlatch_id)){
+                        if($potlatchRosterModel->update($roster->id, ['user_id' => $this->session->user->id])){
+                            $rosterInviteModel->where('id', $inviteCode)->delete();
+                            return redirect()->to('/potlatch/'.$roster->potlatch_id);
+                        }else{ throw new \CodeIgniter\Exceptions\PageNotFoundException(); }
+                    }else{ throw new \CodeIgniter\Exceptions\PageNotFoundException(); }
+                }else{ throw new \CodeIgniter\Exceptions\PageNotFoundException(); }
             }else{ throw new \CodeIgniter\Exceptions\PageNotFoundException(); }
         }else{ return redirect()->to('/login'); }
     }

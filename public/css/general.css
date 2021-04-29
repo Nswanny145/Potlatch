@@ -10,6 +10,7 @@ html, body {
 a {
     text-decoration: none;
     color: inherit;
+    font-family: inherit;
 }
 
 /* ========================================================================
@@ -20,6 +21,7 @@ nav {
     flex-direction: row;
     top: 0;
     position: fixed;
+    z-index: 2;
 
     height: 4rem;
     width: 100%;
@@ -34,6 +36,7 @@ nav {
 nav > brand {
     font-size: x-large;
     padding: 0 2rem;
+    font-family: 'Pacifico', cursive;
 }
 
 nav > content {
@@ -53,7 +56,7 @@ nav > content > div {
     color: black;
 }
 
-nav .login:hover .dropdown {
+nav .login:hover .dropdown, nav .login > *:hover .dropdown {
     display: inherit;
 }
 
@@ -70,7 +73,8 @@ nav .login:hover .dropdown {
                                 Content Styles
    ======================================================================== */
 body > container {
-    overflow: hidden auto;
+    position: relative;
+    overflow: auto;
 
     height: calc(100% - 4rem);
     margin-top: 4rem;
@@ -80,14 +84,33 @@ body > container {
 body > container > footer {
     width: 100%;
 
-    padding-top: 1rem;
+    padding: 0.5rem 0;
 
     text-align: center;
     color: rgb(83, 83, 83);
 }
 
 body > container > content {
+    display: block;
+    width: 100%;
+}
+
+body > container > content > header {
+    background-color: #e9ecef;
+    border-radius: 15px 15px 0 0;
+    padding: 1.25rem;
+}
+
+body > container > content.flex {
     display: flex;
+    flex-wrap: wrap;
+}
+
+body > container > content.flex > * {
+    flex: 1 0 calc(21% - 3rem);
+    max-width: calc(21% - 3rem);
+    margin-bottom: 2rem;
+    margin-right: 2rem;
 }
 
 header {
@@ -97,12 +120,34 @@ header {
 
 header > * {
     margin-right: 2rem;
+    display: inline-flex;
+}
+
+header input {
+    margin: auto 0;
 }
 
 button {
+    white-space: nowrap;
     height: fit-content;
-    padding: 0.3rem 0.6rem;
     margin: auto 0;
+
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+
+button:disabled {
+    cursor: unset;
 }
 
 body > container, card, card > content, button, overlay > content {
@@ -110,14 +155,30 @@ body > container, card, card > content, button, overlay > content {
 }
 
 card {
-    margin: 1rem;
-    width: max-content;
-    border: 1px solid black;
+    display: block;
+    flex-direction: column;
     border-radius: 10px;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    padding: 1.25rem;
 }
 
-card > * {
-    padding: 0 1rem;
+card > header {
+    font-size: large;
+    font-weight: bold;
+}
+
+card > content, card > footer {
+    padding: 1rem 0 0;
+}
+
+card > footer {
+    position: relative;
+    margin-top: auto;
+}
+
+card a {
+    color: #007bff;
 }
 
 overlay {
@@ -145,7 +206,7 @@ overlay > content {
 }
 
 overlay form > input, overlay form > textarea {
-    width: 100%;
+    width: -webkit-fill-available;
     resize: none;
 }
 
@@ -159,12 +220,17 @@ section {
 
     padding-top: 5rem;
 }
+
 section > * {
     padding-right: 2rem;
 }
 
 carousel {
     display: flex;
+}
+
+carousel images {
+    z-index: 1;
 }
 
 carousel img {
@@ -184,6 +250,7 @@ carousel button {
     background-color: transparent;
     cursor: pointer;
     box-shadow: 0 5px 15px -5px grey;
+    z-index: 2;
 }
 
 carousel button:focus {
@@ -196,4 +263,48 @@ carousel button:active {
 
 button, carousel {
     user-select: none;
+}
+
+jumbotron {
+    display: block;
+    margin: 1.25rem 0;
+    padding: 2rem 1rem;
+    background-color: #e9ecef;
+    border-radius: .3rem;
+}
+
+jumbotron hr {
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: #212529;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+.display-4 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+    color: #212529;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    margin-bottom: .5rem;
+}
+
+input {
+    width: 100%;
+    height: fit-content;
+    padding: .375rem .75rem;
+    margin: auto 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }

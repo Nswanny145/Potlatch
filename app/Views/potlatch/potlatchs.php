@@ -1,27 +1,31 @@
 <header>
     <h1>Managed Potlatchs</h1><button onclick="toggleOverlay()">Create Potlatch</button>
 </header>
-<content>
+<content class="flex">
     <?php if(isset($managed) && !empty($managed)): ?>
         <?php foreach($managed as $potlatch): ?>
             <?= view('potlatch/components/potlatch_card.php', $potlatch) ?>
         <?php endforeach; ?>
     <?php else: ?>
-        <p>You have not created any Potlatchs yet.</p>
+        You have not created any Potlatchs yet.
     <?php endif; ?>
 </content>
 <header>
-    <h1>Joined Potlatchs</h1><button>Join Potlatch</button>
+    <h1>Joined Potlatchs</h1>
+    <?= form_open('potlatch/JoinPotlatch', ['style', 'display: inline-flex!important;']) ?>
+        <input type="text" name="code" placeholder="Invite Code" required/><button>Join Potlatch</button>
+    </form>
 </header>
-<content>
+<content class="flex">
     <?php if(isset($joined) && !empty($joined)): ?>
         <?php foreach($joined as $potlatch): ?>
             <?= view('potlatch/components/potlatch_card.php', $potlatch) ?>
         <?php endforeach; ?>
     <?php else: ?>
-        <p>You have not joined any Potlatchs yet.</p>
+        You have not joined any Potlatchs yet.
     <?php endif; ?>
 </content>
+<!-- Overlays -->
 <overlay id="overlay_create">
     <content>
         <button class="close" onclick="toggleOverlay()">Close</button>
